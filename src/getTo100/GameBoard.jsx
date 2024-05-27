@@ -39,6 +39,10 @@ const GameBoard = ({ users }) => {
           return prevGameStates;
       }
 
+       if(newNumber!==100){
+        setCurrentTurn((index + 1) % newGameStates.length);
+       }
+
       newGameStates[index] = {
         ...newGameStates[index],
         currentNumber: newNumber,
@@ -48,7 +52,7 @@ const GameBoard = ({ users }) => {
       return newGameStates;
     });
 
-      setCurrentTurn((prevTurn) => (prevTurn + 1) % gameStates.length);
+      
 
   };
 
@@ -71,7 +75,7 @@ const GameBoard = ({ users }) => {
       return newGameStates;
     });
 
-    //setCurrentTurn((prevTurn) => (prevTurn + 1) % gameStates.length);
+    setCurrentTurn((prevTurn) => (prevTurn + 1) % gameStates.length);
   };
 
   const handleExit = (index) => {
