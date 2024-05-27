@@ -123,6 +123,7 @@ const GameBoard = ({ users }) => {
         ))}
       </ol>
     </div>
+    <div className={styles.playersboard}>
     {gameStates.map((gameState, index) => (
       <div
         key={index}
@@ -151,6 +152,7 @@ const GameBoard = ({ users }) => {
         )}
       </div>
     ))}
+    </div>
   </div>
   );
 };

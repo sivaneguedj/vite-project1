@@ -5,6 +5,12 @@
     padding: 20px;
   }
   
+  .playersboard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
   .leaderboard {
     margin-bottom: 20px;
   }
@@ -29,9 +35,7 @@
     padding: 10px;
     margin: 10px;
     width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 230px;
     background-color: #f9f9f9;
   }
   
