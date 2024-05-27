@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import User from "./User.jsx";
 import ListUser from "./ListUser.jsx";
+import styles from "./Registration.module.css";
 
 export default function Registration(props) {
   const [newUser, setNewUser] = useState("");
@@ -23,7 +24,7 @@ export default function Registration(props) {
   };
 
   return (
-    <main>
+    <main className={styles.regist}>
       <h1>Get to 100!</h1>
       <h3>add players:</h3>
       <User
