@@ -16,7 +16,7 @@ function GetTo100App(){
 
     const[users,setUsers]= useState([]);
     return <>
-     {onRegis? <Registration setUsers={setUsers} handleStartGame={handleStartGame}></Registration>:(
+     {onRegis? <Registration users={users} setUsers={setUsers} handleStartGame={handleStartGame}></Registration>:(
         <GameBoard users={users} handleStopGame={handleStopGame}></GameBoard>
     )}
     </>

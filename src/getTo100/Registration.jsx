@@ -10,16 +10,13 @@ export default function Registration(props) {
     setNewUser((prev) => ({ ...prev, id: Date.now(), [name]: value }));
   };
 
-  const [allUsers, setAllUsers] = useState([]);
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!newUser.title) return;
-    setAllUsers((prev) => [newUser, ...prev]);
     props.setUsers((prev) => [newUser, ...prev])
     setNewUser("");
   };
   const handleDelete = (userIdToRemove) => {
-    setAllUsers((prev) => prev.filter((user) => user.id !== userIdToRemove));
     props.setUsers((prev) => prev.filter((user) => user.id !== userIdToRemove));
   };
 
@@ -33,7 +30,7 @@ export default function Registration(props) {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
         />
-        <ListUser allUsers={allUsers} handleDelete={handleDelete} />
+        <ListUser allUsers={props.users} handleDelete={handleDelete} />
         <button onClick={props.handleStartGame}>start game</button>
       </main>
     
