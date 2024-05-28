@@ -24,16 +24,18 @@ export default function Registration(props) {
   };
 
   return (
-    <main className={styles.regist}>
-      <h1>Get to 100!</h1>
-      <h3>add players:</h3>
-      <User
-        newUser={newUser}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
-      <ListUser allUsers={allUsers} handleDelete={handleDelete} />
-      <button onClick={props.handleStartGame}>start game</button>
-    </main>
+    
+      <main className={styles.regist} >
+        <h1>Get to 100!</h1>
+        <h3>Add players:</h3>
+        <User
+          newUser={newUser}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        <ListUser allUsers={allUsers} handleDelete={handleDelete} />
+        <button onClick={props.handleStartGame}>start game</button>
+      </main>
+    
   );
 }

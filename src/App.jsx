@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './src/App.css'
+import React, { useEffect, useState } from "react";
+import Editor from "./components/Editor";
+import GetTo100App from "./getTo100/GetToo100App";
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activeTab, setActiveTab] = useState('app1');
+
+  useEffect(() => {
+    // Update the body class based on the active tab
+    if (activeTab === 'app1') {
+      document.body.classList.add('game-background');
+      document.body.classList.remove('default-background');
+    } else {
+      document.body.classList.add('default-background');
+      document.body.classList.remove('game-background');
+    }
+  }, [activeTab]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <nav className="tabs">
+        <button onClick={() => setActiveTab('app1')}>GetTo100App</button>
+        <button onClick={() => setActiveTab('app2')}>Editor</button>
+      </nav>
+      <div className="tab-content active">
+        {activeTab === 'app1' && <GetTo100App />}
+        {activeTab === 'app2' && <Editor />}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
+

@@ -4,7 +4,7 @@ import { keyConfigEn, keyConfigHe } from './KeyConfig';
 
 
 
-const Keyboard = ({ onInput, onBackspace, shiftPressed, language }) => {
+const Keyboard = ({ onInput, onBackspace, shiftPressed, language, handleBold, handleItalic, handleUnderline }) => {
   const keyConfig = language === 'en' ? keyConfigEn : keyConfigHe;
   
 
@@ -20,6 +20,9 @@ const Keyboard = ({ onInput, onBackspace, shiftPressed, language }) => {
                 key={key}
                 value={shiftPressed ? key.toUpperCase() : key.toLowerCase()}
                 onClick={onInput}
+                boldPressed={handleBold}
+                italicPressed={handleItalic}
+                underlinePressed={handleUnderline}
               />
             )
           )}

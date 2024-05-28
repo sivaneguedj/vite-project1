@@ -25,6 +25,7 @@ const Editor = () => {
         input = input.toUpperCase();
         setShiftPressed(false);
       }
+      
       setContent(prevText => prevText + input);
     }
     
@@ -114,29 +115,43 @@ const Editor = () => {
 
   return (
     <div className="editor-container" >
+      <h1>My Text Editor</h1>
       <Toolbar 
         onCommand={handleCommand}
         onLanguageChange={handleLanguageChange}
         boldPressed={boldPressed}
         italicPressed={italicPressed}
         underlinePressed={underlinePressed}
-        />
+        >
+      </Toolbar>
       <textarea 
-        className={`editor ${boldPressed ? style.bold : ''} ${italicPressed ? style.italic : ''} ${underlinePressed ? style.underlined : ''}`}   
+        //className={`editor ${boldPressed ? style.bold : ''} ${italicPressed ? style.italic : ''} ${underlinePressed ? style.underlined : ''}`}   
+        className='editor'
         value={content}
         style={{
           fontSize: `${fontSize}px`,
           color: foreColor || 'initial',
-          fontFamily: fontName || 'initial'
+          fontFamily: fontName || 'initial',
+          fontWeight: boldPressed ? 'bold' : 'normal',
+          fontStyle: italicPressed ? 'italic' : 'normal',
+          textDecoration: underlinePressed ? 'underline' : 'none',
 
+          // fontSize: `${fontSize}px`,
+          // color: foreColor || 'initial',
+          // fontFamily: fontName || 'initial',
+          // fontWeight: boldPressed ? 'bold' : 'normal', //
         }}  
-        onInput={(e) => setContent(e.currentTarget.textContent)}
+        //onInput={(e) => setContent(e.currentTarget.textContent)}
+        onChange={(e) => setContent(e.target.value)}
         />
       <Keyboard 
         onInput={handleInput} 
         onBackspace={handleBackspace} 
         shiftPressed={shiftPressed} 
         language={language}
+        boldPressed={handleBold} 
+        italicPressed={handleItalic}
+        underlinePressed={handleUnderline}
          />
     </div>
   );

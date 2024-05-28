@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe, faBold, faItalic, faUnderline, faAlignLeft, faAlignCenter, faAlignRight, faAlignJustify, faFont, faTextHeight, faPalette } from '@fortawesome/free-solid-svg-icons';
+//import BoldButton from './BoldButton';
+import Button from './Button';
+import { faGlobe,faItalic, faUnderline, faAlignLeft, faAlignCenter, faAlignRight, faAlignJustify, faFont, faTextHeight, faPalette } from '@fortawesome/free-solid-svg-icons';
+//import style from './Toolbar.module.css';
 
 
 
@@ -31,24 +34,13 @@ const Toolbar = ({ onCommand, onLanguageChange, boldPressed , italicPressed, und
         Shift
       </button>
 
-      <button
-        onClick={() => onCommand('bold')}
-        className={`toolbar-button ${boldPressed ? 'active' : ''}`}
-      >
-        <FontAwesomeIcon icon={faBold} />
-      </button>
+      {/* <BoldButton boldPressed={boldPressed} handleBold={() => onCommand('bold')}/> */}
+      <Button command ='bold' buttonPressed={boldPressed} handleButton={() => onCommand('bold')}/>
 
-      <button onClick={() => onCommand('italic')} 
-      className={`toolbar-button ${italicPressed ? 'active' : ''}`}
-      >
-        <FontAwesomeIcon icon={faItalic} />
-      </button>
+      <Button command ='italic' buttonPressed={italicPressed} handleButton={() => onCommand('italic')}/>
 
-      <button onClick={() => onCommand('underline')}
-      className={`toolbar-button ${underlinePressed ? 'active' : ''}`}
-      >
-        <FontAwesomeIcon icon={faUnderline} />
-      </button>
+      <Button command ='underline' buttonPressed={underlinePressed} handleButton={() => onCommand('underline')}/>
+
 
 
       <select onChange={(e) => onCommand('fontName', e.target.value)}>
