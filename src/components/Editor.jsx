@@ -25,7 +25,7 @@ const Editor = () => {
         input = input.toUpperCase();
         setShiftPressed(false);
       }
-      
+
       setContent(prevText => prevText + input);
     }
     
@@ -136,12 +136,7 @@ const Editor = () => {
           fontStyle: italicPressed ? 'italic' : 'normal',
           textDecoration: underlinePressed ? 'underline' : 'none',
 
-          // fontSize: `${fontSize}px`,
-          // color: foreColor || 'initial',
-          // fontFamily: fontName || 'initial',
-          // fontWeight: boldPressed ? 'bold' : 'normal', //
         }}  
-        //onInput={(e) => setContent(e.currentTarget.textContent)}
         onChange={(e) => setContent(e.target.value)}
         />
       <Keyboard 
@@ -149,9 +144,6 @@ const Editor = () => {
         onBackspace={handleBackspace} 
         shiftPressed={shiftPressed} 
         language={language}
-        boldPressed={handleBold} 
-        italicPressed={handleItalic}
-        underlinePressed={handleUnderline}
          />
     </div>
   );
