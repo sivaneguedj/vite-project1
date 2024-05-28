@@ -21,12 +21,14 @@ const Editor = () => {
   /* This function is called when a key is pressed on the virtual keyboard.
   It appends the pressed character to the content state. */
     const handleInput = (input) => {
-      if(shiftPressed){
-        input = input.toUpperCase();
-        setShiftPressed(false);
-      }
 
       setContent(prevText => prevText + input);
+      setShiftPressed(false);
+    }
+
+    const handleShift = () => {
+        setShiftPressed(true);
+  
     }
     
 
@@ -42,6 +44,10 @@ const Editor = () => {
     const handleLanguageChange = () => {
         setLanguage((prevLanguage) => (prevLanguage === 'en' ? 'he' : 'en'));
     };
+
+    const handleClear = ()=> {
+        setContent("");
+    }
 
 
     /* This function is called when the Bold button is pressed. */
@@ -81,10 +87,10 @@ const Editor = () => {
   const handleCommand = (command, value) => {
     switch (command) {
       case 'clear':
-        setContent('');
+        handleClear();
         break;
       case 'shift':
-        setShiftPressed(true);
+        handleShift();
         break;
       case 'bold':
         handleBold();
@@ -122,10 +128,11 @@ const Editor = () => {
         boldPressed={boldPressed}
         italicPressed={italicPressed}
         underlinePressed={underlinePressed}
+        onClear={handleClear}
+        onShift={handleShift}
         >
       </Toolbar>
       <textarea 
-        //className={`editor ${boldPressed ? style.bold : ''} ${italicPressed ? style.italic : ''} ${underlinePressed ? style.underlined : ''}`}   
         className='editor'
         value={content}
         style={{

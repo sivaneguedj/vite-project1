@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import BoldButton from './BoldButton';
 import Button from './Button';
+import Select from './Select';
 import { faGlobe,faItalic, faUnderline, faAlignLeft, faAlignCenter, faAlignRight, faAlignJustify, faFont, faTextHeight, faPalette } from '@fortawesome/free-solid-svg-icons';
-//import style from './Toolbar.module.css';
 
 
 
-const Toolbar = ({ onCommand, onLanguageChange, boldPressed , italicPressed, underlinePressed}) => {
+const Toolbar = ({ onCommand, onLanguageChange, boldPressed , italicPressed, underlinePressed, onClear, onShift}) => {
   const [colorDropdownVisible, setColorDropdownVisible] = useState(false);
 
   const toggleColorDropdown = () => {
@@ -22,45 +21,33 @@ const Toolbar = ({ onCommand, onLanguageChange, boldPressed , italicPressed, und
   return (
     <div className="toolbar">
 
-      <button onClick={() => onCommand('clear')} className="toolbar-button">
-        Clear
-      </button>
+      <Button 
+      className="toolbar-button"
+        command ='clear' 
+        buttonPressed={false} 
+        handleButton={() => onCommand('clear')}
+      ></Button>
+
+      <Button 
+        command ='shift' 
+        buttonPressed={false} 
+        handleButton={() => onCommand('shift')}
+      ></Button>
 
       <button onClick={onLanguageChange}>
         <FontAwesomeIcon icon={faGlobe} />
       </button>
 
-      <button onClick={() => onCommand('shift')} className="toolbar-button">
+      {/* <button onClick={() => onCommand('shift')} className="toolbar-button">
         Shift
-      </button>
+      </button> */}
 
-      {/* <BoldButton boldPressed={boldPressed} handleBold={() => onCommand('bold')}/> */}
       <Button command ='bold' buttonPressed={boldPressed} handleButton={() => onCommand('bold')}/>
-
       <Button command ='italic' buttonPressed={italicPressed} handleButton={() => onCommand('italic')}/>
-
       <Button command ='underline' buttonPressed={underlinePressed} handleButton={() => onCommand('underline')}/>
 
-
-
-      <select onChange={(e) => onCommand('fontName', e.target.value)}>
-        <option value="">Font Name</option>
-        <option value="Arial">Arial</option>
-        <option value="Serif">Serif</option>
-        <option value="David">David</option>
-        <option value="Times New Roman">Times New Roman</option>
-      </select>
-
-      
-      <select onChange={(e) => onCommand('size', e.target.value)}>
-      <FontAwesomeIcon icon={faTextHeight} />
-        <option value="">Font Size</option>
-        <option value="12">12</option>
-        <option value="14">14</option>
-        <option value="16">16</option>
-        <option value="20">20</option>
-      </select>
-        
+      <Select command='fontName' handleButton={onCommand} type='fontName' />
+      <Select command='size' handleButton={onCommand} type='fontSize' />         
       
 
       <button onClick={toggleColorDropdown}>
@@ -75,9 +62,6 @@ const Toolbar = ({ onCommand, onLanguageChange, boldPressed , italicPressed, und
           <button onClick={() => handleColorChange('yellow')} style={{ backgroundColor: 'yellow' }}></button>
         </div>
       )}
-
-      
-      
     </div>
   );
 };

@@ -17,7 +17,8 @@ const Keyboard = ({ onInput, onBackspace, shiftPressed, language }) => {
               <Key key={key} value={key} onClick={onBackspace}  />
             ) : (
               <Key
-                key={key}
+                shiftPressed={shiftPressed}
+                key={shiftPressed ? key.toUpperCase() : key.toLowerCase()}
                 value={shiftPressed ? key.toUpperCase() : key.toLowerCase()}
                 onClick={onInput}
               />

@@ -9,14 +9,20 @@ import style from './Key.module.css';
 const Key = (props) => {
     const displayValue = props.value === " " ? "Space" : props.value;
 
+    const getStyles = () => {
+      let styles = {};
+      if (props.shiftPressed && props.value.length === 1) {
+        styles.textTransform = 'uppercase';
+      }
+      return styles;
+    };
 
     return (
       <button 
         className="key" 
         onClick={() => props.onClick(props.value)}
-
         >
-          <span>
+          <span style={getStyles()}>
             {displayValue}
           </span>
           

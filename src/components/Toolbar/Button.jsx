@@ -14,13 +14,20 @@ function Button({ command, buttonPressed, handleButton }) {
     size: faTextHeight,
   };
 
+  // Determine the button content based on the command
+    const getContent = () => {
+      if (command === "clear" || command === "shift") {
+        return command;
+      }
+      return "";
+    };
 
-  return (
+  return ( 
     <button
       onClick={handleButton}
       className={`${style['toolbar-button']} ${buttonPressed ? style.active : ''}`}
     >
-      <FontAwesomeIcon icon={commandToIcon[command]} />
+      {getContent() ? getContent() : <FontAwesomeIcon icon={commandToIcon[command]} />}
     </button>
   );
 }
