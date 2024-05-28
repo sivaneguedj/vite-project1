@@ -74,4 +74,21 @@
   .gameboard__player button:hover {
     background-color: #0056b3;
   }
+
+
+  .stopbutton button {
+    margin: 5px;
+    padding: 8px 12px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #06dcef;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .stopbutton button:hover {
+    background-color: #3909d6;
+  }
+  
   

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './GameBoard.module.css';
 
-const GameBoard = ({ users }) => {
+const GameBoard = ({ users, handleStopGame }) => {
   const loadAllPlayerData = () => {
     return users.map((user) => {
       const savedScores = JSON.parse(localStorage.getItem(user.title)) || [];
@@ -156,6 +156,9 @@ const GameBoard = ({ users }) => {
         )}
       </div>
     ))}
+    </div>
+    <div className={styles.stopbutton}>
+       <button onClick={handleStopGame}>Stop Game</button>
     </div>
   </div>
   );
