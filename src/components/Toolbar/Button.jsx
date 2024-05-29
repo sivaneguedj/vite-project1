@@ -16,7 +16,7 @@ function Button({ command, buttonPressed, handleButton }) {
 
   // Determine the button content based on the command
     const getContent = () => {
-      if (command === "clear" || command === "shift") {
+      if (command === "clear" || command === "shift" || command === "undo") {
         return command;
       }
       return "";

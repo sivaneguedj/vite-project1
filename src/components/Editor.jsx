@@ -16,18 +16,63 @@ const Editor = () => {
   const [fontName, setfontName] = useState('');
   const [fontSize, setfontSize] = useState('');
   const [foreColor, setforeColor] = useState('');
+  const [history, setHistory] = useState([]);
+
+  // Add the current state to the history stack
+  const updateHistory = () => {
+    setHistory((prevHistory) => [
+      ...prevHistory,
+      {
+        content,
+        shiftPressed,
+        language,
+        boldPressed,
+        italicPressed,
+        underlinePressed,
+        fontName,
+        fontSize,
+        foreColor,
+      },
+    ]);
+  };
+
+  // Handle undo action
+  const handleUndo = () => {
+    if (history.length > 0) {
+      const lastState = history[history.length - 1];
+      setContent(lastState.content);
+      setShiftPressed(lastState.shiftPressed);
+      setLanguage(lastState.language);
+      setBoldPressed(lastState.boldPressed);
+      setItalicPressed(lastState.italicPressed);
+      setUnderlinePressed(lastState.underlinePressed);
+      setfontName(lastState.fontName);
+      setfontSize(lastState.fontSize);
+      setforeColor(lastState.foreColor);
+      setHistory((prevHistory) => prevHistory.slice(0, -1));
+    }
+  };
+
+
+  // // Wrap the set state functions to include history update
+  // const setAndUpdateHistory = (setter) => (value) => {
+  //   updateHistory();
+  //   setter(value);
+  // };
+
 
 
   /* This function is called when a key is pressed on the virtual keyboard.
   It appends the pressed character to the content state. */
     const handleInput = (input) => {
-
+      updateHistory();
       setContent(prevText => prevText + input);
       setShiftPressed(false);
     }
 
     const handleShift = () => {
-        setShiftPressed(true);
+      updateHistory();
+      setShiftPressed(true);
   
     }
     
@@ -35,50 +80,59 @@ const Editor = () => {
     /* This function is called when the backspace/Delete key is pressed.
     It removes the last */
     const handleBackspace = () => {
-        setContent((prevContent) => prevContent.slice(0, -1));  
+      updateHistory();
+      setContent((prevContent) => prevContent.slice(0, -1));  
     };
    
 
     /* This function is called when the language button is pressed.
     It switches between languagues */
     const handleLanguageChange = () => {
-        setLanguage((prevLanguage) => (prevLanguage === 'en' ? 'he' : 'en'));
+      updateHistory();
+      setLanguage((prevLanguage) => (prevLanguage === 'en' ? 'he' : 'en'));
     };
 
     const handleClear = ()=> {
+      updateHistory();
         setContent("");
     }
 
 
     /* This function is called when the Bold button is pressed. */
     const handleBold = () => {
+      updateHistory();
       setBoldPressed((prevBoldPressed) => ! prevBoldPressed);
     };
 
 
     /* This function is called when we would like to increase the font size. */
     const handleBiggerFontSize = (size) => {
+      updateHistory();
       setfontSize(size);
     };
     
 
     /* This function is called when Italic button us pressed. */
     const handleItalic = () => {
+      updateHistory();
       setItalicPressed((prevItalicPressed) => !prevItalicPressed);
     };
 
 
     /* This function is called when underline button is pressed. */
     const handleUnderline = () => {
+      updateHistory();
       setUnderlinePressed((prevUnderlinePressed) => !prevUnderlinePressed);
     };
 
     /* This function is called when underline button is pressed. */
     const handleFontName = (font) => {
+      updateHistory();
       setfontName(font);
     };
 
     const handleForeColor = (color) => {
+      updateHistory();
       setforeColor(color);
     };
 
@@ -110,6 +164,8 @@ const Editor = () => {
       case 'foreColor':
         handleForeColor(value);
         break;
+      case 'undo':
+        handleUndo();
       default:
         break;
     }
@@ -130,6 +186,7 @@ const Editor = () => {
         underlinePressed={underlinePressed}
         onClear={handleClear}
         onShift={handleShift}
+        onUndo={handleUndo}
         >
       </Toolbar>
       <textarea 

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from './Button';
 import Select from './Select';
-import { faGlobe,faItalic, faUnderline, faAlignLeft, faAlignCenter, faAlignRight, faAlignJustify, faFont, faTextHeight, faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faGlobe, faPalette } from '@fortawesome/free-solid-svg-icons';
 
 
 
-const Toolbar = ({ onCommand, onLanguageChange, boldPressed , italicPressed, underlinePressed, onClear, onShift}) => {
+const Toolbar = ({ onCommand, onLanguageChange, boldPressed , italicPressed, underlinePressed, onClear, onShift, onUndo}) => {
   const [colorDropdownVisible, setColorDropdownVisible] = useState(false);
 
   const toggleColorDropdown = () => {
@@ -34,20 +34,23 @@ const Toolbar = ({ onCommand, onLanguageChange, boldPressed , italicPressed, und
         handleButton={() => onCommand('shift')}
       ></Button>
 
-      <button onClick={onLanguageChange}>
-        <FontAwesomeIcon icon={faGlobe} />
-      </button>
 
-      {/* <button onClick={() => onCommand('shift')} className="toolbar-button">
-        Shift
-      </button> */}
+      <Button command='undo' 
+        buttonPressed={false} 
+        handleButton={() => onCommand('undo')} 
+         />
+
 
       <Button command ='bold' buttonPressed={boldPressed} handleButton={() => onCommand('bold')}/>
       <Button command ='italic' buttonPressed={italicPressed} handleButton={() => onCommand('italic')}/>
       <Button command ='underline' buttonPressed={underlinePressed} handleButton={() => onCommand('underline')}/>
 
       <Select command='fontName' handleButton={onCommand} type='fontName' />
-      <Select command='size' handleButton={onCommand} type='fontSize' />         
+      <Select command='size' handleButton={onCommand} type='fontSize' /> 
+
+      <button onClick={onLanguageChange}>
+        <FontAwesomeIcon icon={faGlobe} />
+      </button>        
       
 
       <button onClick={toggleColorDropdown}>
